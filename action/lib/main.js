@@ -364,7 +364,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
                 ...flaggedList("--archives", inputs.archives),
                 ...inputs.extra,
             ];
-            yield execPython("aqt install-qt", qtArgs);
+            yield execPython("aqt -c /aqt.cfg install-qt", qtArgs);
         }
         const installSrcDocExamples = (flavor, archives, modules) => __awaiter(void 0, void 0, void 0, function* () {
             const qtArgs = [
@@ -376,7 +376,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
                 ...flaggedList("--modules", modules),
                 ...inputs.extra,
             ];
-            yield execPython(`aqt install-${flavor}`, qtArgs);
+            yield execPython(`aqt -c /aqt.cfg install-${flavor}`, qtArgs);
         });
         // Install source, docs, & examples
         if (inputs.src) {
@@ -393,7 +393,7 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
             const toolArgs = [inputs.host, inputs.target, tool];
             toolArgs.push("--outputdir", inputs.dir);
             toolArgs.push(...inputs.extra);
-            yield execPython("aqt install-tool", toolArgs);
+            yield execPython("aqt -c /aqt.cfg install-tool", toolArgs);
         }
     }
     // Save automatic cache
