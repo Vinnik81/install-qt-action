@@ -398,7 +398,7 @@ const run = async (): Promise<void> => {
         ...inputs.extra,
       ];
 
-      await execPython("aqt -c /aqt.cfg install-qt", qtArgs);
+      await execPython("aqt install-qt", qtArgs);
     }
 
     const installSrcDocExamples = async (
@@ -415,7 +415,7 @@ const run = async (): Promise<void> => {
         ...flaggedList("--modules", modules),
         ...inputs.extra,
       ];
-      await execPython(`aqt -c /aqt.cfg install-${flavor}`, qtArgs);
+      await execPython(`aqt install-${flavor}`, qtArgs);
     };
 
     // Install source, docs, & examples
@@ -434,7 +434,7 @@ const run = async (): Promise<void> => {
       const toolArgs = [inputs.host, inputs.target, tool];
       toolArgs.push("--outputdir", inputs.dir);
       toolArgs.push(...inputs.extra);
-      await execPython("aqt -c /aqt.cfg install-tool", toolArgs);
+      await execPython("aqt install-tool", toolArgs);
     }
   }
 
@@ -474,6 +474,7 @@ const run = async (): Promise<void> => {
       core.exportVariable("QT_ROOT_DIR", qtPath);
       core.exportVariable("QT_PLUGIN_PATH", path.resolve(qtPath, "plugins"));
       core.exportVariable("QML2_IMPORT_PATH", path.resolve(qtPath, "qml"));
+	  core.exportVariable("AQT_CONFIG", "/aqt.cfg");
       core.addPath(path.resolve(qtPath, "bin"));
     }
   }
